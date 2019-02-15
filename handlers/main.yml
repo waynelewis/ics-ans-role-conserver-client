@@ -1,5 +1,0 @@
----
-- name: restart conserver
-  systemd:
-    name: conserver
-    state: restarted

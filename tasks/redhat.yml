@@ -3,28 +3,14 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - conserver
+    - conserver-client
+  become: yes
 
-- name: create conserver.cf file
+- name: create console.cf file
   template:
-    src: conserver.cf.j2
-    dest: /etc/conserver.cf
+    src: console.cf.j2
+    dest: /etc/console.cf
     owner: root
     group: root
     mode: 0644
-  notify: restart conserver
-
-- name: create conserver.passwd file
-  template:
-    src: conserver.passwd.j2
-    dest: /etc/conserver.passwd
-    owner: root
-    group: root
-    mode: 0644
-  notify: restart conserver
-
-- name: ensure conserver is started and enabled
-  systemd:
-    name: conserver
-    state: started
-    enabled: yes
+  become: yes
